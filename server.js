@@ -3,13 +3,13 @@ import { DatabaseSync } from "node:sqlite";
 import fs from "node:fs";
 import path from "node:path";
 import { Readable } from "node:stream";
-import app from "./src/worker.js";
+import app from "./worker.js";
 
 const dir = path.resolve(process.env.DATA_DIR || "./data");
 fs.mkdirSync(path.join(dir, "apk"), { recursive: true });
 const sql = new DatabaseSync(path.join(dir, "shield.db"));
 sql.exec("PRAGMA journal_mode=WAL;");
-sql.exec(fs.readFileSync(new URL("./database/schema.sql", import.meta.url), "utf8"));
+sql.exec(fs.readFileSync(new URL("./schema.sql", import.meta.url), "utf8"));
 
 // D1-compatible wrapper so the app code stays unchanged
 const stmt = (q, a = []) => ({
