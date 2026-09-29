@@ -158,14 +158,14 @@ const LOGO = `<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"
 // ---------- public layout ----------
 const dlText = s => (s.lang === "en" ? s.download_text : s.t.dl);
 function layout(s, title, body, path, extra = {}) {
-  const t = s.t || T.en, lang = s.lang || "en";
+  const t = s.t || T.en, lang = s.lang || "en", o = s.origin || "";
   const ttl = title ? `${title} — ${s.site_name}` : t.ttl;
   const pixel = s.pixel_enabled === "1" && /^\d{5,20}$/.test(s.pixel_id) ? s.pixel_id : "";
   const cta = `<a class="btn s" href="/download" data-track="download_click">${esc(dlText(s))}</a>`;
   const sw = `<span class="lang">${["uz", "ru", "en"].map(l => `<a href="${esc(path)}?lang=${l}" class="${l === lang ? "on" : ""}">${l.toUpperCase()}</a>`).join("")}</span>`;
   return html(`<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(ttl)}</title><meta name="description" content="${esc(t.desc)}"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="${esc(ttl)}"><meta property="og:description" content="${esc(t.desc)}"><meta property="og:image" content="/og.svg"><meta property="og:url" content="${esc(path)}"><meta property="og:type" content="website">
+<meta property="og:title" content="${esc(ttl)}"><meta property="og:description" content="${esc(t.desc)}"><meta property="og:image" content="${esc(o)}/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="${esc(o + path)}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
 <style>${CSS}.lang{display:flex;gap:2px}.lang a{padding:4px 8px;border-radius:8px;font-size:13px;color:var(--m)}.lang a.on{background:#ffffff18;color:#fff}</style></head><body>
 <header><div class="w nav"><a class="logo" href="/">${LOGO}${esc(s.site_name)}</a><button id="mb" aria-label="Menu">☰</button>
 <nav id="nav"><a href="/">${t.nav.home}</a><a href="/features">${t.nav.features}</a><a href="/faq">${t.nav.faq}</a><a href="/privacy">${t.nav.privacy}</a><a href="/download">${t.nav.download}</a>${sw}${cta}</nav></div></header>
@@ -377,6 +377,7 @@ export default {
       if (p.startsWith("/admin")) return (await admin(req, env, url, await getSettings(env))) || errPage(await getSettings(env), "404", "Page not found", "This page does not exist.");
       const s = await getSettings(env);
       const [lang, setC] = pickLang(req, url, s); s.lang = lang; s.t = T[lang];
+      const host = req.headers.get("host") || url.host; s.origin = (/^localhost|^127\./.test(host) ? "http://" : "https://") + host;
       const res = await pub(req, env, url, p, s);
       if (setC) res.headers.append("set-cookie", `lang=${lang}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`);
       return res;

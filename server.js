@@ -40,4 +40,8 @@ if (!process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET.length
   console.error("Set ADMIN_SESSION_SECRET (32+ chars)"); process.exit(1);
 }
 const env = { DB, APK, ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET, SETUP_TOKEN: process.env.SETUP_TOKEN };
-serve({ fetch: req => app.fetch(req, env), port: +process.env.PORT || 3000, hostname: "0.0.0.0" }, i => console.log("Shield VPN on :" + i.port));
+const ogPng = fs.existsSync(new URL("./og.png", import.meta.url)) ? fs.readFileSync(new URL("./og.png", import.meta.url)) : null;
+const handle = req => (ogPng && new URL(req.url).pathname === "/og.png"
+  ? new Response(ogPng, { headers: { "content-type": "image/png", "cache-control": "public, max-age=86400" } })
+  : app.fetch(req, env));
+serve({ fetch: handle, port: +process.env.PORT || 3000, hostname: "0.0.0.0" }, i => console.log("Shield VPN on :" + i.port));
