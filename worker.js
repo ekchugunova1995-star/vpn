@@ -1,27 +1,90 @@
 // Shield VPN — fetch handler: public site, admin panel, tracking, APK download.
 // Runs on Node via server.js (env.DB = SQLite, env.APK = files on a volume).
 
-const T = { en: {
-  tag: "Private. Simple. Free.", dl: "Download VPN", how: "How it works",
+const T = {
+en: {
+  tag: "Private. Simple. Free.", dl: "Download VPN", how: "How it works", conn: "Connected",
   h1: "A safer way to browse.", sub: "Shield VPN gives you a simple and private way to connect online.",
   why: "Why Shield VPN?",
-  feats: [["Private browsing", "Browse the internet with an additional layer of privacy."],
-    ["Simple connection", "Connect with just a few taps."],
-    ["Free to use", "Access the basic Shield VPN experience without a subscription."],
-    ["Android ready", "Designed for Android devices and easy to install."]],
-  steps: ["Download Shield VPN", "Install the app", "Connect and browse"],
+  feats: [["Private browsing", "Browse the internet with an additional layer of privacy."], ["Simple connection", "Connect with just a few taps."], ["Free to use", "Access the basic Shield VPN experience without a subscription."], ["Android ready", "Designed for Android devices and easy to install."]],
+  steps: ["Download Shield VPN", "Install the app", "Connect and browse"], flow: ["Device", "Shield VPN", "Internet"],
   trustH: "Your connection, your choice.", trust: "Shield VPN is designed to provide a simple VPN experience without unnecessary complexity.",
-  faq: [["What is Shield VPN?", "Shield VPN is a VPN application designed to provide an additional layer of privacy when browsing the internet."],
-    ["Is Shield VPN free?", "Yes, the basic Shield VPN download is free."],
-    ["Which devices are supported?", "The current APK is intended for Android devices."],
-    ["How do I install Shield VPN?", "Download the APK from the official download page and follow the Android installation instructions."],
-    ["How do I connect?", "Open Shield VPN and use the connection control inside the application."],
-    ["Do I need an account?", "Account requirements depend on the app itself. Edit this answer in translations to match your app."],
-    ["Where can I download the latest version?", "The latest APK is always available through the official Shield VPN download page."],
-    ["How can I contact support?", "Use the contact page or the support address shown there."]],
+  faqH: "FAQ",
+  faq: [["What is Shield VPN?", "Shield VPN is a VPN application designed to provide an additional layer of privacy when browsing the internet."], ["Is Shield VPN free?", "Yes, the basic Shield VPN download is free."], ["Which devices are supported?", "The current APK is intended for Android devices."], ["How do I install Shield VPN?", "Download the APK from the official download page and follow the Android installation instructions."], ["How do I connect?", "Open Shield VPN and use the connection control inside the application."], ["Do I need an account?", "Account requirements depend on the app itself. Edit this answer to match your app."], ["Where can I download the latest version?", "The latest APK is always available through the official Shield VPN download page."], ["How can I contact support?", "Use the contact page or the support address shown there."]],
   unavailable: "Shield VPN is temporarily unavailable", back: "Please check back soon.",
-} };
-const t = T.en;
+  nav: { home: "Home", features: "Features", faq: "FAQ", privacy: "Privacy", download: "Download" }, foot: { privacy: "Privacy Policy", contact: "Contact" },
+  cb: { msg: "We use anonymous analytics. Optional Meta Pixel needs your consent.", ok: "Accept", no: "Reject", manage: "Manage preferences" },
+  gs: "Get Shield VPN", dlLead: "Download the latest version of Shield VPN for Android.", ver: "Latest version", type: "File type", size: "File size", upd: "Updated", apk: "Download APK",
+  agree: ["By downloading Shield VPN, you agree to our ", "Privacy Policy", "."], instH: "Installation", inst: ["Download the APK.", "Open the downloaded file.", "Follow the Android installation instructions.", "Open Shield VPN and connect."],
+  contactH: "Need help?", contactP: "If you have questions about Shield VPN, installation or downloads, contact our support team.",
+  e404: "Page not found", e404m: "This page does not exist.", e500: "Something went wrong", e500m: "Please try again later.", home2: "Home",
+  ttl: "Shield VPN — Free VPN for Android", desc: "Shield VPN is a simple and free VPN solution for Android. Download the latest version and connect in just a few steps.", privT: "Privacy Policy",
+  priv: e => `<p>This policy describes what this website collects. It applies to the website only, not to the behaviour of the Android app.</p>
+<h3>What we collect</h3><ul><li>Pages visited, button clicks (Download, FAQ, external links) and timestamps.</li><li>A random anonymous session ID stored in your browser's local storage.</li><li>Referral/UTM parameters (source, medium, campaign, content, term) if present in the link.</li></ul>
+<p>Our own analytics database does <b>not</b> store your IP address, device fingerprints or contact details. Our hosting provider (Railway) processes IP addresses and request metadata to deliver and protect the site.</p>
+<h3>Meta Pixel</h3><p>If enabled by the site owner and you click Accept, Meta Pixel loads and sends events (PageView, ViewContent, DownloadAPK) to Meta, a third party with its own policy. If you Reject, it does not load.</p>
+<h3>Cookies and local storage</h3><p>We use local storage for the session ID, saved UTM parameters and your consent choice, and a cookie for your language choice. The admin area uses a strictly necessary session cookie for the site owner only.</p>
+<h3>Why and how long</h3><p>To understand how many people visit and download, and which campaigns work. Event data is kept for up to 12 months.</p>
+<h3>Requests</h3><p>Privacy requests: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Because events are anonymous, we may be unable to link them to you.</p>`,
+},
+uz: {
+  tag: "Maxfiy. Oddiy. Bepul.", dl: "VPN yuklab olish", how: "Qanday ishlaydi", conn: "Ulangan",
+  h1: "Internetdan xavfsizroq foydalaning.", sub: "Shield VPN internetga oddiy va maxfiy ulanish imkonini beradi.",
+  why: "Nega Shield VPN?",
+  feats: [["Maxfiy brauzer", "Internetda ishlashda qo'shimcha maxfiylik qatlami."], ["Oddiy ulanish", "Bir necha bosish bilan ulaning."], ["Bepul", "Asosiy Shield VPN imkoniyatlaridan obunasiz foydalaning."], ["Android uchun", "Android qurilmalar uchun yaratilgan, o'rnatish oson."]],
+  steps: ["Shield VPN ni yuklab oling", "Ilovani o'rnating", "Ulaning va internetdan foydalaning"], flow: ["Qurilma", "Shield VPN", "Internet"],
+  trustH: "Sizning ulanishingiz — sizning tanlovingiz.", trust: "Shield VPN ortiqcha murakkabliksiz oddiy VPN tajribasini taqdim etish uchun yaratilgan.",
+  faqH: "Savol-javob",
+  faq: [["Shield VPN nima?", "Shield VPN — internetdan foydalanishda qo'shimcha maxfiylik qatlamini ta'minlaydigan VPN ilovasi."], ["Shield VPN bepulmi?", "Ha, Shield VPN ning asosiy versiyasini bepul yuklab olish mumkin."], ["Qaysi qurilmalar qo'llab-quvvatlanadi?", "Joriy APK Android qurilmalar uchun mo'ljallangan."], ["Shield VPN ni qanday o'rnataman?", "Rasmiy yuklab olish sahifasidan APK ni yuklab oling va Android ko'rsatmalariga amal qiling."], ["Qanday ulanaman?", "Shield VPN ni oching va ilova ichidagi ulanish tugmasidan foydalaning."], ["Akkaunt kerakmi?", "Akkaunt talablari ilovaning o'ziga bog'liq. Bu javobni ilovangizga moslab tekshiring."], ["So'nggi versiyani qayerdan yuklab olaman?", "So'nggi APK doim Shield VPN ning rasmiy yuklab olish sahifasida mavjud."], ["Qo'llab-quvvatlash bilan qanday bog'lanaman?", "Aloqa sahifasidan va u yerda ko'rsatilgan manzildan foydalaning."]],
+  unavailable: "Shield VPN vaqtincha mavjud emas", back: "Iltimos, birozdan so'ng qaytib keling.",
+  nav: { home: "Bosh sahifa", features: "Imkoniyatlar", faq: "Savol-javob", privacy: "Maxfiylik", download: "Yuklab olish" }, foot: { privacy: "Maxfiylik siyosati", contact: "Aloqa" },
+  cb: { msg: "Biz anonim analitikadan foydalanamiz. Ixtiyoriy Meta Pixel sizning roziligingizni talab qiladi.", ok: "Qabul qilish", no: "Rad etish", manage: "Sozlamalar" },
+  gs: "Shield VPN ni yuklab oling", dlLead: "Android uchun Shield VPN ning so'nggi versiyasini yuklab oling.", ver: "So'nggi versiya", type: "Fayl turi", size: "Fayl hajmi", upd: "Yangilangan", apk: "APK yuklab olish",
+  agree: ["Shield VPN ni yuklab olish orqali siz ", "Maxfiylik siyosati", " bilan rozilik bildirasiz."], instH: "O'rnatish", inst: ["APK faylni yuklab oling.", "Yuklab olingan faylni oching.", "Android ko'rsatmalariga amal qilib o'rnating.", "Shield VPN ni oching va ulaning."],
+  contactH: "Yordam kerakmi?", contactP: "Shield VPN, o'rnatish yoki yuklab olish bo'yicha savollaringiz bo'lsa, qo'llab-quvvatlash xizmatiga murojaat qiling.",
+  e404: "Sahifa topilmadi", e404m: "Bunday sahifa mavjud emas.", e500: "Nimadir xato ketdi", e500m: "Iltimos, keyinroq urinib ko'ring.", home2: "Bosh sahifa",
+  ttl: "Shield VPN — Android uchun bepul VPN", desc: "Shield VPN — Android uchun oddiy va bepul VPN. So'nggi versiyani yuklab oling va bir necha qadamda ulaning.", privT: "Maxfiylik siyosati",
+  priv: e => `<p>Ushbu siyosat veb-sayt qanday ma'lumotlarni yig'ishini tushuntiradi. U faqat veb-saytga tegishli, Android ilovasining ishiga emas.</p>
+<h3>Nimalarni yig'amiz</h3><ul><li>Ko'rilgan sahifalar, tugmalar bosilishi (yuklab olish, savol-javob, tashqi havolalar) va vaqti.</li><li>Brauzeringizning mahalliy xotirasida saqlanadigan tasodifiy anonim sessiya identifikatori.</li><li>Havolada bo'lsa, UTM parametrlari (source, medium, campaign, content, term).</li></ul>
+<p>Bizning analitika bazamiz sizning IP manzilingizni, qurilma "barmoq izi"ni yoki aloqa ma'lumotlaringizni <b>saqlamaydi</b>. Hosting provayderimiz (Railway) saytni ishlatish va himoyalash uchun IP manzillar va so'rovlarning texnik ma'lumotlarini qayta ishlaydi.</p>
+<h3>Meta Pixel</h3><p>Sayt egasi Meta Pixel'ni yoqqan bo'lsa va siz "Qabul qilish"ni bossangiz, u yuklanadi va voqealarni (PageView, ViewContent, DownloadAPK) Metaga yuboradi; Meta — o'z siyosatiga ega uchinchi tomon. "Rad etish"ni bossangiz, u yuklanmaydi.</p>
+<h3>Cookie va mahalliy xotira</h3><p>Mahalliy xotirani sessiya ID, saqlangan UTM belgilar va rozilik tanlovingiz uchun, cookie'ni esa til tanlovi uchun ishlatamiz. Admin panel faqat sayt egasi uchun zarur sessiya cookie'sidan foydalanadi.</p>
+<h3>Nima uchun va qancha vaqt</h3><p>Saytga qancha odam kirishi va yuklab olishini hamda qaysi kampaniyalar ishlashini tushunish uchun. Voqealar 12 oygacha saqlanadi.</p>
+<h3>So'rovlar</h3><p>Maxfiylik bo'yicha so'rovlar: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Voqealar anonim bo'lgani uchun ularni sizga bog'lay olmasligimiz mumkin.</p>`,
+},
+ru: {
+  tag: "Приватно. Просто. Бесплатно.", dl: "Скачать VPN", how: "Как это работает", conn: "Подключено",
+  h1: "Безопаснее в интернете.", sub: "Shield VPN — простой и приватный способ подключаться к сети.",
+  why: "Почему Shield VPN?",
+  feats: [["Приватный серфинг", "Пользуйтесь интернетом с дополнительным уровнем приватности."], ["Простое подключение", "Подключайтесь в несколько касаний."], ["Бесплатно", "Базовые возможности Shield VPN — без подписки."], ["Для Android", "Создан для Android-устройств, легко устанавливается."]],
+  steps: ["Скачайте Shield VPN", "Установите приложение", "Подключитесь и пользуйтесь интернетом"], flow: ["Устройство", "Shield VPN", "Интернет"],
+  trustH: "Ваше соединение — ваш выбор.", trust: "Shield VPN создан, чтобы дать простой VPN без лишней сложности.",
+  faqH: "Вопросы и ответы",
+  faq: [["Что такое Shield VPN?", "Shield VPN — это VPN-приложение, которое обеспечивает дополнительный уровень приватности при работе в интернете."], ["Shield VPN бесплатный?", "Да, базовая версия Shield VPN доступна для скачивания бесплатно."], ["Какие устройства поддерживаются?", "Текущий APK предназначен для устройств на Android."], ["Как установить Shield VPN?", "Скачайте APK на официальной странице загрузки и следуйте инструкциям Android по установке."], ["Как подключиться?", "Откройте Shield VPN и используйте кнопку подключения внутри приложения."], ["Нужен ли аккаунт?", "Требования к аккаунту зависят от самого приложения. Проверьте и при необходимости поправьте этот ответ."], ["Где скачать последнюю версию?", "Последний APK всегда доступен на официальной странице загрузки Shield VPN."], ["Как связаться с поддержкой?", "Воспользуйтесь страницей контактов и указанным там адресом поддержки."]],
+  unavailable: "Shield VPN временно недоступен", back: "Пожалуйста, загляните позже.",
+  nav: { home: "Главная", features: "Возможности", faq: "Вопросы", privacy: "Конфиденциальность", download: "Скачать" }, foot: { privacy: "Политика конфиденциальности", contact: "Контакты" },
+  cb: { msg: "Мы используем анонимную аналитику. Необязательный Meta Pixel требует вашего согласия.", ok: "Принять", no: "Отклонить", manage: "Настройки" },
+  gs: "Скачайте Shield VPN", dlLead: "Скачайте последнюю версию Shield VPN для Android.", ver: "Последняя версия", type: "Тип файла", size: "Размер файла", upd: "Обновлено", apk: "Скачать APK",
+  agree: ["Скачивая Shield VPN, вы соглашаетесь с нашей ", "Политикой конфиденциальности", "."], instH: "Установка", inst: ["Скачайте APK-файл.", "Откройте скачанный файл.", "Следуйте инструкциям Android по установке.", "Откройте Shield VPN и подключитесь."],
+  contactH: "Нужна помощь?", contactP: "Если у вас есть вопросы о Shield VPN, установке или скачивании, свяжитесь со службой поддержки.",
+  e404: "Страница не найдена", e404m: "Такой страницы не существует.", e500: "Что-то пошло не так", e500m: "Пожалуйста, попробуйте позже.", home2: "На главную",
+  ttl: "Shield VPN — бесплатный VPN для Android", desc: "Shield VPN — простой и бесплатный VPN для Android. Скачайте последнюю версию и подключитесь за несколько шагов.", privT: "Политика конфиденциальности",
+  priv: e => `<p>Эта политика описывает, какие данные собирает сайт. Она относится только к сайту, а не к работе Android-приложения.</p>
+<h3>Что мы собираем</h3><ul><li>Посещённые страницы, клики по кнопкам (скачивание, FAQ, внешние ссылки) и время событий.</li><li>Случайный анонимный идентификатор сессии в локальном хранилище браузера.</li><li>Реферальные/UTM-параметры (source, medium, campaign, content, term), если они есть в ссылке.</li></ul>
+<p>Наша собственная база аналитики <b>не</b> хранит ваш IP-адрес, отпечатки устройства или контактные данные. Наш хостинг-провайдер (Railway) обрабатывает IP-адреса и технические данные запросов для работы и защиты сайта.</p>
+<h3>Meta Pixel</h3><p>Если владелец сайта включил Meta Pixel и вы нажали «Принять», он загружается и отправляет события (PageView, ViewContent, DownloadAPK) в Meta — стороннюю компанию со своей политикой. Если вы нажали «Отклонить», он не загружается.</p>
+<h3>Cookie и локальное хранилище</h3><p>Мы используем локальное хранилище для ID сессии, сохранённых UTM-меток и вашего выбора согласия, а cookie — для выбора языка. Админ-панель использует необходимую сессионную cookie только для владельца сайта.</p>
+<h3>Зачем и как долго</h3><p>Чтобы понимать, сколько людей посещают сайт и скачивают приложение, и какие кампании работают. События хранятся до 12 месяцев.</p>
+<h3>Запросы</h3><p>Запросы по конфиденциальности: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Поскольку события анонимны, мы можем не иметь возможности связать их с вами.</p>`,
+},
+};
+function pickLang(req, url, s) {
+  const q = url.searchParams.get("lang");
+  if (q && T[q]) return [q, true];
+  const m = (req.headers.get("cookie") || "").match(/(?:^|; )lang=(\w+)/);
+  if (m && T[m[1]]) return [m[1], false];
+  return [T[s.default_language] ? s.default_language : "uz", false];
+}
 
 const enc = new TextEncoder();
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -41,7 +104,7 @@ async function pbkdf2(pw, salt) {
 const safeEq = (a, b) => a.length === b.length && [...a].reduce((r, c, i) => r | (c.charCodeAt(0) ^ b.charCodeAt(i)), 0) === 0;
 
 const DEFAULTS = { site_name: "Shield VPN", support_email: "support@example.com", support_link: "", telegram_link: "",
-  download_text: "Download VPN", pixel_id: "", pixel_enabled: "0", tracking_enabled: "1", default_language: "en" };
+  download_text: "Download VPN", pixel_id: "", pixel_enabled: "0", tracking_enabled: "1", default_language: "uz" };
 async function getSettings(env) {
   const { results } = await env.DB.prepare("SELECT key,value FROM settings").all();
   return { ...DEFAULTS, ...Object.fromEntries(results.map(r => [r.key, r.value])) };
@@ -93,20 +156,22 @@ input,textarea,select{width:100%;padding:10px 12px;border-radius:10px;border:1px
 const LOGO = `<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2563eb"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><path d="M16 2l11 4v9c0 7-5 12-11 15C10 27 5 22 5 15V6z" fill="url(#g)"/><path d="M11 16l4 4 6-8" stroke="#050b1f" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`;
 
 // ---------- public layout ----------
+const dlText = s => (s.lang === "en" ? s.download_text : s.t.dl);
 function layout(s, title, body, path, extra = {}) {
-  const desc = "Shield VPN is a simple and free VPN solution for Android. Download the latest version and connect in just a few steps.";
-  const ttl = title ? `${title} — ${s.site_name}` : `${s.site_name} — Free VPN for Android`;
+  const t = s.t || T.en, lang = s.lang || "en";
+  const ttl = title ? `${title} — ${s.site_name}` : t.ttl;
   const pixel = s.pixel_enabled === "1" && /^\d{5,20}$/.test(s.pixel_id) ? s.pixel_id : "";
-  const cta = `<a class="btn s" href="/download" data-track="download_click">${esc(s.download_text)}</a>`;
-  return html(`<!doctype html><html lang="${s.default_language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(ttl)}</title><meta name="description" content="${desc}"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="${esc(ttl)}"><meta property="og:description" content="${desc}"><meta property="og:image" content="/og.svg"><meta property="og:url" content="${esc(path)}"><meta property="og:type" content="website">
-<style>${CSS}</style></head><body>
+  const cta = `<a class="btn s" href="/download" data-track="download_click">${esc(dlText(s))}</a>`;
+  const sw = `<span class="lang">${["uz", "ru", "en"].map(l => `<a href="${esc(path)}?lang=${l}" class="${l === lang ? "on" : ""}">${l.toUpperCase()}</a>`).join("")}</span>`;
+  return html(`<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(ttl)}</title><meta name="description" content="${esc(t.desc)}"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="${esc(ttl)}"><meta property="og:description" content="${esc(t.desc)}"><meta property="og:image" content="/og.svg"><meta property="og:url" content="${esc(path)}"><meta property="og:type" content="website">
+<style>${CSS}.lang{display:flex;gap:2px}.lang a{padding:4px 8px;border-radius:8px;font-size:13px;color:var(--m)}.lang a.on{background:#ffffff18;color:#fff}</style></head><body>
 <header><div class="w nav"><a class="logo" href="/">${LOGO}${esc(s.site_name)}</a><button id="mb" aria-label="Menu">☰</button>
-<nav id="nav"><a href="/">Home</a><a href="/features">Features</a><a href="/faq">FAQ</a><a href="/privacy">Privacy</a><a href="/download">Download</a>${cta}</nav></div></header>
+<nav id="nav"><a href="/">${t.nav.home}</a><a href="/features">${t.nav.features}</a><a href="/faq">${t.nav.faq}</a><a href="/privacy">${t.nav.privacy}</a><a href="/download">${t.nav.download}</a>${sw}${cta}</nav></div></header>
 <main>${body}</main>
-<footer><div class="w fr"><span>© ${new Date().getFullYear()} ${esc(s.site_name)} · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a></span><a class="btn s" href="/download" data-track="download_click">${esc(s.download_text)}</a></div></footer>
-<div id="cb"><span>We use anonymous analytics. Optional Meta Pixel needs your consent.</span><button class="btn s" id="ca">Accept</button><button class="btn s o" id="cr">Reject</button><a href="/privacy" style="text-decoration:underline">Manage preferences</a></div>
+<footer><div class="w fr"><span>© ${new Date().getFullYear()} ${esc(s.site_name)} · <a href="/privacy">${t.foot.privacy}</a> · <a href="/contact">${t.foot.contact}</a></span><a class="btn s" href="/download" data-track="download_click">${esc(dlText(s))}</a></div></footer>
+<div id="cb"><span>${t.cb.msg}</span><button class="btn s" id="ca">${t.cb.ok}</button><button class="btn s o" id="cr">${t.cb.no}</button><a href="/privacy" style="text-decoration:underline">${t.cb.manage}</a></div>
 <script>window.SV=${JSON.stringify({ track: s.tracking_enabled === "1", pixel, page: extra.event || null })};
 (function(){var q=new URLSearchParams(location.search),K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"],ls=window.localStorage||{};
 var sid=ls.sv_sid;if(!sid){sid=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)+Date.now());ls.sv_sid=sid}
@@ -120,41 +185,40 @@ var cb=document.getElementById("cb");if(!c&&SV.pixel)cb.style.display="flex";
 document.getElementById("ca").onclick=function(){ls.sv_consent=c="yes";cb.style.display="none";pix()};document.getElementById("cr").onclick=function(){ls.sv_consent="no";cb.style.display="none"};
 document.getElementById("mb").onclick=function(){document.getElementById("nav").classList.toggle("open")};
 document.addEventListener("click",function(e){var a=e.target.closest("[data-track]");if(!a)return;var ev=a.dataset.track;
-if(ev==="apk_click"){var p=new URLSearchParams(Object.assign({sid:sid},u));delete p._n;a.href="/api/download?"+p;if(window.fbq)fbq("trackCustom","DownloadAPK");return}
-tr(ev);if(ev==="external_click"&&window.fbq){}});
+if(ev==="apk_click"){var p=new URLSearchParams(Object.assign({sid:sid},u));p.delete("_n");a.href="/api/download?"+p;if(window.fbq)fbq("trackCustom","DownloadAPK");return}
+tr(ev)});
 document.querySelectorAll("details[data-faq]").forEach(function(d){d.addEventListener("toggle",function(){if(d.open)tr("faq_open")})})})();</script></body></html>`);
 }
 
-const dlCta = s => `<a class="btn" href="/download" data-track="download_click">${esc(s.download_text)}</a>`;
-const phone = `<div class="phone" aria-hidden="true"><svg width="200" height="60" viewBox="0 0 200 60"><g stroke="#3b82f6" fill="#22d3ee"><path d="M10 30h50M140 30h50" fill="none"/><circle cx="10" cy="30" r="4"/><circle cx="190" cy="30" r="4"/></g></svg><div class="ring">${LOGO.replace('width="30" height="30"', 'width="56" height="56"')}</div><b>Shield VPN</b><span style="color:#22d3ee">● Connected</span></div>`;
+const dlCta = s => `<a class="btn" href="/download" data-track="download_click">${esc(dlText(s))}</a>`;
+const phone = t => `<div class="phone" aria-hidden="true"><svg width="200" height="60" viewBox="0 0 200 60"><g stroke="#3b82f6" fill="#22d3ee"><path d="M10 30h50M140 30h50" fill="none"/><circle cx="10" cy="30" r="4"/><circle cx="190" cy="30" r="4"/></g></svg><div class="ring">${LOGO.replace('width="30" height="30"', 'width="56" height="56"')}</div><b>Shield VPN</b><span style="color:#22d3ee">● ${t.conn}</span></div>`;
 
 function home(s) {
-  return layout(s, "", `<div class="w"><div class="hero"><div><h1>${t.h1}</h1><p class="lead">${t.sub}</p><div class="row">${dlCta(s)}<a class="btn o" href="#how">${t.how}</a></div></div>${phone}</div>
+  const t = s.t;
+  return layout(s, "", `<div class="w"><div class="hero"><div><h1>${t.h1}</h1><p class="lead">${t.sub}</p><div class="row">${dlCta(s)}<a class="btn o" href="#how">${t.how}</a></div></div>${phone(t)}</div>
 <section><h2>${t.why}</h2><div class="grid">${t.feats.map(f => `<div class="card"><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join("")}</div><div class="row">${dlCta(s)}</div></section>
-<section id="how"><h2>${t.how}</h2><div class="grid">${t.steps.map((x, i) => `<div class="card"><div class="n">0${i + 1}</div><h3>${x}</h3></div>`).join("")}</div><div class="flow"><b>Device</b>→<b style="color:#22d3ee">Shield VPN</b>→<b>Internet</b></div></section>
+<section id="how"><h2>${t.how}</h2><div class="grid">${t.steps.map((x, i) => `<div class="card"><div class="n">0${i + 1}</div><h3>${x}</h3></div>`).join("")}</div><div class="flow"><b>${t.flow[0]}</b>→<b style="color:#22d3ee">${t.flow[1]}</b>→<b>${t.flow[2]}</b></div></section>
 <section class="card" style="text-align:center"><h2>${t.trustH}</h2><p class="lead" style="margin:auto">${t.trust}</p></section>
-<section style="text-align:center"><h2>Get Shield VPN</h2>${dlCta(s)}</section></div>`, "/");
+<section style="text-align:center"><h2>${t.gs}</h2>${dlCta(s)}</section></div>`, "/");
 }
-const features = s => layout(s, "Features", `<div class="w"><section><h2>${t.why}</h2><div class="grid">${t.feats.map(f => `<div class="card"><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join("")}</div><div class="row">${dlCta(s)}</div></section></div>`, "/features");
-const faq = s => layout(s, "FAQ", `<div class="w"><section><h2>FAQ</h2>${t.faq.map(q => `<details data-faq><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join("")}</section></div>`, "/faq");
-const contact = s => layout(s, "Contact", `<div class="w"><section><h2>Need help?</h2><p class="lead">If you have questions about Shield VPN, installation or downloads, contact our support team.</p><p><a class="btn" href="${s.support_link ? esc(s.support_link) : "mailto:" + esc(s.support_email)}" data-track="external_click">${esc(s.support_email)}</a></p>${s.telegram_link ? `<p><a href="${esc(s.telegram_link)}" data-track="external_click">Telegram</a></p>` : ""}</section></div>`, "/contact");
-const privacy = s => layout(s, "Privacy Policy", `<div class="w prose"><section><h2>Privacy Policy</h2>
-<p>This policy describes what this website collects. It applies to the website only, not to the behaviour of the Android app.</p>
-<h3>What we collect</h3><ul><li>Pages visited, button clicks (Download, FAQ, external links) and timestamps.</li><li>A random anonymous session ID stored in your browser's local storage.</li><li>Referral/UTM parameters (source, medium, campaign, content, term) if present in the link.</li></ul>
-<p>Our own analytics database does <b>not</b> store your IP address, device fingerprints or contact details. Our hosting provider (Railway) processes IP addresses and request metadata to deliver and protect the site, and may provide approximate location to us in aggregate.</p>
-<h3>Meta Pixel</h3><p>If enabled by the site owner and you click Accept, Meta Pixel loads and sends events (PageView, ViewContent, DownloadAPK) to Meta, which is a third party with its own policy. If you Reject, it does not load.</p>
-<h3>Cookies and local storage</h3><p>We use local storage for the session ID, saved UTM parameters and your consent choice. The admin area uses a strictly necessary session cookie for the site owner only.</p>
-<h3>Why and how long</h3><p>To understand how many people visit and download, and which campaigns work. Event data is kept for up to 12 months (set your own retention and update this text).</p>
-<h3>Requests</h3><p>Privacy requests: <a style="text-decoration:underline" href="mailto:${esc(s.support_email)}">${esc(s.support_email)}</a>. Because events are anonymous, we may be unable to link them to you.</p></section></div>`, "/privacy", { event: "privacy_view" });
+const features = s => layout(s, s.t.nav.features, `<div class="w"><section><h2>${s.t.why}</h2><div class="grid">${s.t.feats.map(f => `<div class="card"><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join("")}</div><div class="row">${dlCta(s)}</div></section></div>`, "/features");
+const faq = s => layout(s, s.t.faqH, `<div class="w"><section><h2>${s.t.faqH}</h2>${s.t.faq.map(q => `<details data-faq><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join("")}</section></div>`, "/faq");
+const contact = s => layout(s, s.t.foot.contact, `<div class="w"><section><h2>${s.t.contactH}</h2><p class="lead">${s.t.contactP}</p><p><a class="btn" href="${s.support_link ? esc(s.support_link) : "mailto:" + esc(s.support_email)}" data-track="external_click">${esc(s.support_email)}</a></p>${s.telegram_link ? `<p><a href="${esc(s.telegram_link)}" data-track="external_click">Telegram</a></p>` : ""}</section></div>`, "/contact");
+const privacy = s => layout(s, s.t.privT, `<div class="w prose"><section><h2>${s.t.privT}</h2>${s.t.priv(esc(s.support_email))}</section></div>`, "/privacy", { event: "privacy_view" });
 
 async function downloadPage(s, env) {
+  const t = s.t;
   const a = await env.DB.prepare("SELECT * FROM apk_versions WHERE is_active=1").first();
-  const card = a ? `<div class="card"><h3>Shield VPN</h3><p>Latest version: <b>${esc(a.version)}</b><br>File type: APK<br>File size: ${mb(a.file_size)}<br>Updated: ${day(a.created_at)}</p><p style="margin-top:18px"><a class="btn" href="/api/download" data-track="apk_click">Download APK</a></p><p style="margin-top:12px;font-size:14px">By downloading Shield VPN, you agree to our <a style="text-decoration:underline" href="/privacy">Privacy Policy</a>.</p></div>`
+  const card = a ? `<div class="card"><h3>Shield VPN</h3><p>${t.ver}: <b>${esc(a.version)}</b><br>${t.type}: APK<br>${t.size}: ${mb(a.file_size)}<br>${t.upd}: ${day(a.created_at)}</p><p style="margin-top:18px"><a class="btn" href="/api/download" data-track="apk_click">${t.apk}</a></p><p style="margin-top:12px;font-size:14px">${t.agree[0]}<a style="text-decoration:underline" href="/privacy">${t.agree[1]}</a>${t.agree[2]}</p></div>`
     : `<div class="card"><h3>${t.unavailable}</h3><p>${t.back}</p></div>`;
-  return layout(s, "Download", `<div class="w"><section><h1 style="font-size:44px">Get Shield VPN</h1><p class="lead">Download the latest version of Shield VPN for Android.</p><div style="max-width:520px;margin-top:24px">${card}</div>
-<h3 style="margin-top:36px">Installation</h3><ol class="prose"><li>Download the APK.</li><li>Open the downloaded file.</li><li>Follow the Android installation instructions.</li><li>Open Shield VPN and connect.</li></ol></section></div>`, "/download", { event: "download_page_view" });
+  return layout(s, t.nav.download, `<div class="w"><section><h1 style="font-size:44px">${t.gs}</h1><p class="lead">${t.dlLead}</p><div style="max-width:520px;margin-top:24px">${card}</div>
+<h3 style="margin-top:36px">${t.instH}</h3><ol class="prose">${t.inst.map(x => `<li>${x}</li>`).join("")}</ol></section></div>`, "/download", { event: "download_page_view" });
 }
-const errPage = (s, code, title, msg) => layout(s, title, `<div class="w" style="text-align:center;padding:100px 0"><h1>${code}</h1><h2>${title}</h2><p class="lead" style="margin:auto">${msg}</p><p style="margin-top:24px"><a class="btn" href="/">Home</a></p></div>`, "/").then(r => new Response(r.body, { status: code === "Unavailable" ? 503 : +code || 200, headers: r.headers }));
+function errPage(s, code, title, msg) {
+  const t = s.t || T.en;
+  const r = layout(s, title, `<div class="w" style="text-align:center;padding:100px 0">${+code ? `<h1>${code}</h1>` : ""}<h2>${title}</h2><p class="lead" style="margin:auto">${msg}</p><p style="margin-top:24px"><a class="btn" href="/">${t.home2}</a></p></div>`, "/");
+  return new Response(r.body, { status: code === "Unavailable" ? 503 : +code || 200, headers: r.headers });
+}
 
 // ---------- tracking ----------
 const EVENTS = new Set(["page_view", "download_page_view", "download_click", "apk_download", "faq_open", "privacy_view", "external_click"]);
@@ -292,6 +356,17 @@ async function admin(req, env, url, s) {
 }
 
 // ---------- router ----------
+async function pub(req, env, url, p, s) {
+  if (p === "/api/track" && req.method === "POST") return apiTrack(req, env, s);
+  if (p === "/api/download" && req.method === "GET") return apiDownload(env, url, s);
+  if (req.method !== "GET") return new Response("Method not allowed", { status: 405 });
+  const pages = { "/": home, "/features": features, "/faq": faq, "/privacy": privacy, "/contact": contact };
+  if (pages[p]) return pages[p](s);
+  if (p === "/download") return downloadPage(s, env);
+  if (p === "/download-unavailable") return errPage(s, "Unavailable", s.t.unavailable, s.t.back);
+  return errPage(s, "404", s.t.e404, s.t.e404m);
+}
+
 const svgHeaders = { "content-type": "image/svg+xml", "cache-control": "public, max-age=86400" };
 export default {
   async fetch(req, env) {
@@ -301,17 +376,13 @@ export default {
       if (p === "/og.svg") return new Response(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2563eb"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="1200" height="630" fill="#050b1f"/><circle cx="950" cy="120" r="260" fill="#2563eb" opacity=".25"/><path d="M180 200l90 32v72c0 56-40 96-90 120-50-24-90-64-90-120v-72z" fill="url(#g)"/><text x="330" y="300" font-family="Arial" font-size="96" font-weight="700" fill="#fff">Shield VPN</text><text x="334" y="370" font-family="Arial" font-size="40" fill="#7dd3fc">Private. Simple. Free.</text></svg>`, { headers: svgHeaders });
       if (p.startsWith("/admin")) return (await admin(req, env, url, await getSettings(env))) || errPage(await getSettings(env), "404", "Page not found", "This page does not exist.");
       const s = await getSettings(env);
-      if (p === "/api/track" && req.method === "POST") return apiTrack(req, env, s);
-      if (p === "/api/download" && req.method === "GET") return apiDownload(env, url, s);
-      if (req.method !== "GET") return new Response("Method not allowed", { status: 405 });
-      const pages = { "/": home, "/features": features, "/faq": faq, "/privacy": privacy, "/contact": contact };
-      if (pages[p]) return pages[p](s);
-      if (p === "/download") return downloadPage(s, env);
-      if (p === "/download-unavailable") return errPage(s, "Unavailable", t.unavailable, t.back);
-      return errPage(s, "404", "Page not found", "This page does not exist.");
+      const [lang, setC] = pickLang(req, url, s); s.lang = lang; s.t = T[lang];
+      const res = await pub(req, env, url, p, s);
+      if (setC) res.headers.append("set-cookie", `lang=${lang}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`);
+      return res;
     } catch (e) {
       console.error(e);
-      return errPage(await getSettings(env).catch(() => DEFAULTS), "500", "Something went wrong", "Please try again later.");
+      const s2 = { ...(await getSettings(env).catch(() => DEFAULTS)), lang: "uz", t: T.uz }; return errPage(s2, "500", T.uz.e500, T.uz.e500m);
     }
   },
 };
