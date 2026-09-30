@@ -22,8 +22,8 @@ en: {
   priv: e => `<p>This policy describes what this website collects. It applies to the website only, not to the behaviour of the Android app.</p>
 <h3>What we collect</h3><ul><li>Pages visited, button clicks (Download, FAQ, external links) and timestamps.</li><li>A random anonymous session ID stored in your browser's local storage.</li><li>Referral/UTM parameters (source, medium, campaign, content, term) if present in the link.</li></ul>
 <p>Our own analytics database does <b>not</b> store your IP address, device fingerprints or contact details. Our hosting provider (Railway) processes IP addresses and request metadata to deliver and protect the site.</p>
-<h3>Meta Pixel</h3><p>If enabled by the site owner and you click Accept, Meta Pixel loads and sends events (PageView, ViewContent, DownloadAPK) to Meta, a third party with its own policy. If you Reject, it does not load.</p>
-<h3>Cookies and local storage</h3><p>We use local storage for the session ID, saved UTM parameters and your consent choice, and a cookie for your language choice. The admin area uses a strictly necessary session cookie for the site owner only.</p>
+<h3>Meta Pixel</h3><p>If enabled by the site owner, Meta Pixel loads on every visit and sends events (PageView, ViewContent, DownloadAPK when you press the download button) to Meta, a third party with its own privacy policy. Meta may process data such as IP address and browser information and may set its own cookies (for example _fbp). Blocking trackers in your browser prevents it from loading.</p>
+<h3>Cookies and local storage</h3><p>We use local storage for the session ID, saved UTM parameters, and a cookie for your language choice. The admin area uses a strictly necessary session cookie for the site owner only.</p>
 <h3>Why and how long</h3><p>To understand how many people visit and download, and which campaigns work. Event data is kept for up to 12 months.</p>
 <h3>Requests</h3><p>Privacy requests: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Because events are anonymous, we may be unable to link them to you.</p>`,
 },
@@ -47,8 +47,8 @@ uz: {
   priv: e => `<p>Ushbu siyosat veb-sayt qanday ma'lumotlarni yig'ishini tushuntiradi. U faqat veb-saytga tegishli, Android ilovasining ishiga emas.</p>
 <h3>Nimalarni yig'amiz</h3><ul><li>Ko'rilgan sahifalar, tugmalar bosilishi (yuklab olish, savol-javob, tashqi havolalar) va vaqti.</li><li>Brauzeringizning mahalliy xotirasida saqlanadigan tasodifiy anonim sessiya identifikatori.</li><li>Havolada bo'lsa, UTM parametrlari (source, medium, campaign, content, term).</li></ul>
 <p>Bizning analitika bazamiz sizning IP manzilingizni, qurilma "barmoq izi"ni yoki aloqa ma'lumotlaringizni <b>saqlamaydi</b>. Hosting provayderimiz (Railway) saytni ishlatish va himoyalash uchun IP manzillar va so'rovlarning texnik ma'lumotlarini qayta ishlaydi.</p>
-<h3>Meta Pixel</h3><p>Sayt egasi Meta Pixel'ni yoqqan bo'lsa va siz "Qabul qilish"ni bossangiz, u yuklanadi va voqealarni (PageView, ViewContent, DownloadAPK) Metaga yuboradi; Meta — o'z siyosatiga ega uchinchi tomon. "Rad etish"ni bossangiz, u yuklanmaydi.</p>
-<h3>Cookie va mahalliy xotira</h3><p>Mahalliy xotirani sessiya ID, saqlangan UTM belgilar va rozilik tanlovingiz uchun, cookie'ni esa til tanlovi uchun ishlatamiz. Admin panel faqat sayt egasi uchun zarur sessiya cookie'sidan foydalanadi.</p>
+<h3>Meta Pixel</h3><p>Sayt egasi Meta Pixel'ni yoqqan bo'lsa, u har bir tashrifda yuklanadi va voqealarni (PageView, ViewContent, yuklab olish tugmasi bosilganda DownloadAPK) Metaga yuboradi; Meta — o'z maxfiylik siyosatiga ega uchinchi tomon. Meta IP manzil va brauzer ma'lumotlarini qayta ishlashi hamda o'z cookie fayllarini (masalan, _fbp) o'rnatishi mumkin. Brauzeringizda trekerlarni bloklasangiz, u yuklanmaydi.</p>
+<h3>Cookie va mahalliy xotira</h3><p>Mahalliy xotirani sessiya ID, saqlangan UTM belgilar uchun, cookie'ni esa til tanlovi uchun ishlatamiz. Admin panel faqat sayt egasi uchun zarur sessiya cookie'sidan foydalanadi.</p>
 <h3>Nima uchun va qancha vaqt</h3><p>Saytga qancha odam kirishi va yuklab olishini hamda qaysi kampaniyalar ishlashini tushunish uchun. Voqealar 12 oygacha saqlanadi.</p>
 <h3>So'rovlar</h3><p>Maxfiylik bo'yicha so'rovlar: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Voqealar anonim bo'lgani uchun ularni sizga bog'lay olmasligimiz mumkin.</p>`,
 },
@@ -72,8 +72,8 @@ ru: {
   priv: e => `<p>Эта политика описывает, какие данные собирает сайт. Она относится только к сайту, а не к работе Android-приложения.</p>
 <h3>Что мы собираем</h3><ul><li>Посещённые страницы, клики по кнопкам (скачивание, FAQ, внешние ссылки) и время событий.</li><li>Случайный анонимный идентификатор сессии в локальном хранилище браузера.</li><li>Реферальные/UTM-параметры (source, medium, campaign, content, term), если они есть в ссылке.</li></ul>
 <p>Наша собственная база аналитики <b>не</b> хранит ваш IP-адрес, отпечатки устройства или контактные данные. Наш хостинг-провайдер (Railway) обрабатывает IP-адреса и технические данные запросов для работы и защиты сайта.</p>
-<h3>Meta Pixel</h3><p>Если владелец сайта включил Meta Pixel и вы нажали «Принять», он загружается и отправляет события (PageView, ViewContent, DownloadAPK) в Meta — стороннюю компанию со своей политикой. Если вы нажали «Отклонить», он не загружается.</p>
-<h3>Cookie и локальное хранилище</h3><p>Мы используем локальное хранилище для ID сессии, сохранённых UTM-меток и вашего выбора согласия, а cookie — для выбора языка. Админ-панель использует необходимую сессионную cookie только для владельца сайта.</p>
+<h3>Meta Pixel</h3><p>Если владелец сайта включил Meta Pixel, он загружается при каждом посещении и отправляет события (PageView, ViewContent, DownloadAPK при нажатии на кнопку скачивания) в Meta — стороннюю компанию со своей политикой конфиденциальности. Meta может обрабатывать данные, например IP-адрес и сведения о браузере, и устанавливать собственные cookie (например, _fbp). Блокировка трекеров в браузере предотвращает его загрузку.</p>
+<h3>Cookie и локальное хранилище</h3><p>Мы используем локальное хранилище для ID сессии, сохранённых UTM-меток, а cookie — для выбора языка. Админ-панель использует необходимую сессионную cookie только для владельца сайта.</p>
 <h3>Зачем и как долго</h3><p>Чтобы понимать, сколько людей посещают сайт и скачивают приложение, и какие кампании работают. События хранятся до 12 месяцев.</p>
 <h3>Запросы</h3><p>Запросы по конфиденциальности: <a style="text-decoration:underline" href="mailto:${e}">${e}</a>. Поскольку события анонимны, мы можем не иметь возможности связать их с вами.</p>`,
 },
@@ -171,18 +171,14 @@ function layout(s, title, body, path, extra = {}) {
 <nav id="nav"><a href="/">${t.nav.home}</a><a href="/features">${t.nav.features}</a><a href="/faq">${t.nav.faq}</a><a href="/privacy">${t.nav.privacy}</a><a href="/download">${t.nav.download}</a>${sw}${cta}</nav></div></header>
 <main>${body}</main>
 <footer><div class="w fr"><span>© ${new Date().getFullYear()} ${esc(s.site_name)} · <a href="/privacy">${t.foot.privacy}</a> · <a href="/contact">${t.foot.contact}</a></span><a class="btn s" href="/download" data-track="download_click">${esc(dlText(s))}</a></div></footer>
-<div id="cb"><span>${t.cb.msg}</span><button class="btn s" id="ca">${t.cb.ok}</button><button class="btn s o" id="cr">${t.cb.no}</button><a href="/privacy" style="text-decoration:underline">${t.cb.manage}</a></div>
 <script>window.SV=${JSON.stringify({ track: s.tracking_enabled === "1", pixel, page: extra.event || null })};
 (function(){var q=new URLSearchParams(location.search),K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"],ls=window.localStorage||{};
 var sid=ls.sv_sid;if(!sid){sid=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)+Date.now());ls.sv_sid=sid}
 var u=JSON.parse(ls.sv_utm||"{}");K.forEach(function(k){if(q.get(k)){u[k]=q.get(k).slice(0,100);u._n=1}});if(u._n)ls.sv_utm=JSON.stringify(u);
 function tr(e){if(!SV.track)return;var b=JSON.stringify(Object.assign({event:e,page:location.pathname,sid:sid},u));
 if(navigator.sendBeacon)navigator.sendBeacon("/api/track",new Blob([b],{type:"application/json"}));else fetch("/api/track",{method:"POST",body:b,keepalive:true})}
-var c=ls.sv_consent;
-function pix(){if(!SV.pixel||c!=="yes"||window.fbq)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init",SV.pixel);fbq("track","PageView");if(SV.page==="download_page_view")fbq("track","ViewContent",{content_name:"Shield VPN APK"})}
+function pix(){if(!SV.pixel||window.fbq)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init",SV.pixel);fbq("track","PageView");if(SV.page==="download_page_view")fbq("track","ViewContent",{content_name:"Shield VPN APK"})}
 tr("page_view");if(SV.page)tr(SV.page);pix();
-var cb=document.getElementById("cb");if(!c&&SV.pixel)cb.style.display="flex";
-document.getElementById("ca").onclick=function(){ls.sv_consent=c="yes";cb.style.display="none";pix()};document.getElementById("cr").onclick=function(){ls.sv_consent="no";cb.style.display="none"};
 document.getElementById("mb").onclick=function(){document.getElementById("nav").classList.toggle("open")};
 document.addEventListener("click",function(e){var a=e.target.closest("[data-track]");if(!a)return;var ev=a.dataset.track;
 if(ev==="apk_click"){var p=new URLSearchParams(Object.assign({sid:sid},u));p.delete("_n");a.href="/api/download?"+p;if(window.fbq)fbq("trackCustom","DownloadAPK");return}
